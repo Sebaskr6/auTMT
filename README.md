@@ -37,14 +37,14 @@
 
 ## 📂 Project Structure
 ```
-automatic-tmt/
-├── 📓 notebooks/
-│   ├── 01_environment_setup.ipynb
-│   ├── 02_data_download.ipynb
-│   ├── 03_preprocessing.ipynb
-│   ├── 04_measurement_pipeline.ipynb
-│   └── 05_end_to_end.ipynb
-├── 🐍 scripts/
+auTMT/
+├── Code/
+│   ├── auTMT.ipynb
+│   ├── End2End.py
+│   ├── Etapa1.py
+│   ├── Etapa2.py
+│   └── Etapa3.py
+├── Requirements.txt
 └── 📄 README.md
 ```
 
