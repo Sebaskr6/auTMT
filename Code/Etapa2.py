@@ -710,7 +710,9 @@ def detectar_ojos_por_consistencia(volumen: np.ndarray,
         )
 
         if circles is not None:
-            centers = np.uint16(np.around(circles[0, :, :2]))
+            # int32, not uint16: the tracker subtracts centres, and unsigned values
+            # wrap around (100 - 102 -> 65534) whenever a coordinate decreases.
+            centers = np.around(circles[0, :, :2]).astype(np.int32)
             centros_por_corte.append(centers)
 
             if guardar_mosaico:
