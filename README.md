@@ -39,12 +39,15 @@
 ```
 auTMT/
 ├── Code/
-│   ├── auTMT.ipynb
-│   ├── End2End.py
-│   ├── Etapa1.py
-│   ├── Etapa2.py
-│   └── Etapa3.py
-├── Requirements.txt
+│   ├── AuTMT.ipynb          # guided notebook (setup → stages → end-to-end)
+│   ├── End2End.py           # DICOM → TMT in one run (single patient / batch)
+│   ├── Etapa1.py            # Stage 1 · DICOM loading + PCA head reorientation
+│   ├── Etapa2.py            # Stage 2 · eye detection (Hough) + optimal axial slice
+│   └── Etapa3.py            # Stage 3 · HU segmentation + thickness in mm
+├── tests/                   # pytest suite on synthetic phantoms
+├── .github/workflows/       # CI: runs the tests on every push
+├── requirements.txt
+├── requirements-dev.txt     # requirements + pytest
 └── 📄 README.md
 ```
 
@@ -59,6 +62,25 @@ auTMT/
 | 3️⃣ | `03_preprocessing` | Image preprocessing and preliminary analysis |
 | 4️⃣ | `04_measurement_pipeline` | TMT measurement execution by stages |
 | 5️⃣ | `05_end_to_end` | Full pipeline run from input to results |
+
+---
+
+## 🧪 Tests
+
+The pipeline is meant to run on real head CT scans, which cannot be shipped with the repository. The test suite therefore builds **small synthetic phantoms with known geometry** and checks that each stage recovers it:
+
+| Stage | What is verified |
+|-------|------------------|
+| **1 · Reorientation** | rotation matrices are proper rotations and compose correctly; header rotation keeps voxels and rotates about the volume centre; PCA recovers the angle of a synthetic bone bar in every plane; DICOM series discovery, loading (RAI) and NIfTI export |
+| **2 · Optimal slice** | mm ↔ % ↔ slice-index conversions and their edge cases (out of range, zero-width range, empty volumes); eye-pair selection against distractors; Hough eye detection on a two-eye phantom, including eyes that drift between slices |
+| **3 · TMT measurement** | HU windowing, RAS reorientation, pixel → world coordinates; muscle thickness on bands of known width and spacing; skull tangent points; full `Processing` on a skull + brain + temporal-muscle phantom (expected thickness within 0.5 mm); CSV and 3D Slicer markup export |
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+> Writing these tests uncovered a bug in Stage 2: detected eye centres were stored as `uint16`, so the tracker's `previous − current` subtraction wrapped around (`100 − 102 → 65534`) whenever a coordinate decreased between slices. With drifting eyes, estimated positions were off by up to ~30 px; they are now stored as `int32` and a regression test covers it.
 
 ---
 

@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Pipeline outputs (generated when running on real scans)
+*.nii
+*.nii.gz
+*.dcm
+Img_auto_mosaicos/
+Img_auto_paciente/
+*.csv

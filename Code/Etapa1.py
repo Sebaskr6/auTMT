@@ -523,7 +523,7 @@ def obtener_rotacion_eje_x(angulo):
     ----------
     angulo : float
         Ángulo de rotación en grados. Un valor positivo rota en sentido
-        antihorario visto desde el eje X positivo.
+        horario visto desde el eje X positivo (internamente t = -ángulo).
 
     Retorna
     -------
@@ -546,7 +546,7 @@ def obtener_rotacion_eje_y(angulo):
     ----------
     angulo : float
         Ángulo de rotación en grados. Un valor positivo rota en sentido
-        antihorario visto desde el eje Y positivo.
+        horario visto desde el eje Y positivo (internamente t = -ángulo).
 
     Retorna
     -------
@@ -569,7 +569,7 @@ def obtener_rotacion_eje_z(angulo):
     ----------
     angulo : float
         Ángulo de rotación en grados. Un valor positivo rota en sentido
-        antihorario visto desde el eje Z positivo.
+        horario visto desde el eje Z positivo (internamente t = -ángulo).
 
     Retorna
     -------
