@@ -12,6 +12,7 @@
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Work%20In%20Progress-F4A261?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Academic-8338EC?style=for-the-badge)
+[![tests](https://github.com/Sebaskr6/auTMT/actions/workflows/tests.yml/badge.svg)](https://github.com/Sebaskr6/auTMT/actions/workflows/tests.yml)
 
 </td>
 <td align="right" valign="top" width="140">
